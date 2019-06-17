@@ -1,0 +1,21 @@
+The base system and apple diagnostics images being used are sourced from a particular release's installer.
+
+If using this for another release, obtain the installer for that release from apple, and find the needed files by:
+
+ 1. Right click the "Install Mac OS" application. 
+ 2. Select "Show package contents" from the right-click menu.
+ 3. Copy the files needed from the installer's /Contents/SharedSupport directory.
+ 4. Paste them into the recovery_partition_installation/resources/ directory, replacing the existing files. (do not keep both)
+ 5. Update the .info file in the resources/ directory's name to reflect the source installer version, in case the solution is reshared.
+
+
+* There is a slightly more involved way to obtain the same files with a smaller downloaded package. (The Mac OS Installation image is over 6GB, where is this is under 500MB)
+
+Download from apple's website a copy of macOSUpd10.X.X.RecoveryHDUpdate.pkg closest to your version of MacOS
+High Sierra:
+ - http://swcdn.apple.com/content/downloads/42/58/091-94330/mm8vnigq4ulozt9iqhgcl9hp8m7iygsqbl/macOSUpd10.13.6.RecoveryHDUpdate.pkg
+Mojave:
+- http://swcdn.apple.com/content/downloads/38/20/091-97092/b1x2wtc2frxrelisto98z0nlryo4bta4xg/macOSUpd10.14.2.RecoveryHDUpdate.pkg
+
+Then run: pkgutil --expand <path to package> <path to expand>
+Mount RecoveryHDMeta.dmg and copy the same files from it.
