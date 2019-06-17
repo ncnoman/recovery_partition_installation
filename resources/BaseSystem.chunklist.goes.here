@@ -1,0 +1,42 @@
+Download one of the following for the closest version less than or equal to the installed release.
+(must be the same major release - i.e 10.13 or 10.14)
+
+High Sierra:
+URL="http://swcdn.apple.com/content/downloads/42/58/091-94330/mm8vnigq4ulozt9iqhgcl9hp8m7iygsqbl/macOSUpd10.13.6.RecoveryHDUpdate.pkg"
+
+Mojave:
+URL="http://swcdn.apple.com/content/downloads/38/20/091-97092/b1x2wtc2frxrelisto98z0nlryo4bta4xg/macOSUpd10.14.2.RecoveryHDUpdate.pkg"
+
+URL="http://swcdn.apple.com/content/downloads/13/38/041-57074/o46jekrijxrkfybffroi02an8yxqr5mbjt/macOSUpd10.14.5.RecoveryHDUpdate.pkg"
+
+curl $URL --progress-bar -L -o ~/Downloads/
+
+Expand the file using the appropriate pkgutil command.
+
+pkgutil --expand ~/Downloads/macOSUpd10.13.6.RecoveryHDUpdate.pkg ~/Downloads/recoveryupdate10.13.6
+pkgutil --expand ~/Downloads/macOSUpd10.14.2.RecoveryHDUpdate.pkg ~/Downloads/recoveryupdate10.14.2
+pkgutil --expand ~/Downloads/macOSUpd10.14.5.RecoveryHDUpdate.pkg ~/Downloads/recoveryupdate10.14.5
+
+Mount the Disk image containing the needed file using the appropriate open command.
+
+open ~/Downloads/recoveryupdate10.13.6/RecoveryHDMeta.dmg
+open ~/Downloads/recoveryupdate10.14.2/RecoveryHDMeta.dmg
+open ~/Downloads/recoveryupdate10.13.6/RecoveryHDMeta.dmg
+
+Copy the needed file(s) to the resources/ directory.
+
+cp /Volumes/RecoveryHDMeta/BaseSystem.dmg recovery_partition_installation/resources/
+cp /Volumes/RecoveryHDMeta/BaseSystem.chunklist recovery_partition_installation/resources/
+cp /Volumes/RecoveryHDMeta/AppleDiagnostics.dmg recovery_partition_installation/resources/
+cp /Volumes/RecoveryHDMeta/AppleDiagnostics.chunklist recovery_partition_installation/resources/
+
+--------------------------------------------------------------------------------------
+
+Alternatively, the same file can be obtained from the much larger "Install Mac OS" application for any major release, available from the app store.
+
+Once the ~6GB installation app has been downloaded:
+ 1. Right click the "Install Mac OS" application. 
+ 2. Select "Show package contents" from the right-click menu.
+ 3. Copy the files needed from the installer's /Contents/SharedSupport directory.
+ 4. Paste them into the recovery_partition_installation/resources/ directory
+
