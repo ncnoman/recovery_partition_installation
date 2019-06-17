@@ -1,0 +1,15 @@
+Download the 10.13.6 Recovery HD Update pkg. This works perfectly with Mojave.
+Apple must have gotten wise to folks trying to circumvent their dumbass "reinstall mac os" official solution, 
+as they stopped including dm in future release of the same pkg.
+
+go to: http://swcdn.apple.com/content/downloads/42/58/091-94330/mm8vnigq4ulozt9iqhgcl9hp8m7iygsqbl/macOSUpd10.13.6.RecoveryHDUpdate.pkg
+or
+curl --progress-bar -L -o ~/Downloads/ http://swcdn.apple.com/content/downloads/42/58/091-94330/mm8vnigq4ulozt9iqhgcl9hp8m7iygsqbl/macOSUpd10.13.6.RecoveryHDUpdate.pkg
+
+Expand the file using the appropriate pkgutil command.
+
+pkgutil --expand ~/Downloads/macOSUpd10.13.6.RecoveryHDUpdate.pkg ~/Downloads/recoveryupdate10.13.6
+
+Mount the Disk image containing "dm" using the appropriate open command.
+
+~/Downloads/recoveryupdate10.13.6/Scripts/Tools/dm goes (here) in recovery_partition_installation/tools/
