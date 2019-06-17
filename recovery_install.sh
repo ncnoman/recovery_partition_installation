@@ -18,26 +18,15 @@ fi
 
 #identify target disk (bless --info --getBoot) parameters needed for dm tool
 BOOT_DISK="$(bless --info --getBoot | awk -F / '{print $3}')"
-#the below BOOT_DISK defintion probably only doesn't work on encrypted volumes, but, the above BOOT_DISK definition is simpler, and works with diskutil, df,  and dm nonetheless too.
-#preserving it here if this can later be determined and is useful.
-#The difference is the above definition is based on /dev/<device> i.e. disk0s2, the below definition is the name of the volume. i.e. "Mac OS"
-
-#BOOT_DISK=$(diskutil info "$(bless --info --getBoot)" | awk -F':' '/Volume Name/ { print $2 }' | sed -e 's/^[[:space:]]*//')
-
-#if more can be determined about what causes diskutil to display "Not applicable" for Volume Name and filesystem Type, this script could be shortened,
-#  because the if [ "$CORRECT" != "y" ] confirming the disk to be partitioned with the user and the if [ "$FS_TYPE" == '' ] cases could be skipped.
-# (the FS_TYPE definition's use of diskutil can't be avoided since dm must be ran with different syntax depending on the file system.)
-#however, its believed to be encryption that causes the unexpected diskutil output, something that should (hopefully) is out of scope for the use case for this script.
-
 FS_TYPE=$(diskutil info "$BOOT_DISK" | awk '$1 == "Type" { print $NF }')
 if [ "$FS_TYPE" == '' ]; then
   echo " The file system type could not be determined. The target disk is most likely encrypted."
   echo
   sleep 2
-  echo " This script is designed for use on unencrypted volumes, one purpose being to enable FileVault encryption, which requires the Recovery HD partition."
+  echo " This script is designed for use on unencrypted volumes, the purpose being to enable FileVault encryption, which requires the Recovery HD partition."
   echo
   sleep 2
-  echo " You will be prompted for entering the file system type manually, BUT IT IS UNKNOWN IF THE dm TOOL CAN RUN ON AN ENCRYPTED VOLUME."
+  echo " IT IS UNKNOWN IF THE dm TOOL CAN RUN ON AN ENCRYPTED VOLUME."
   echo " The script will attempt to run as if the boot volume is formatted as hfs+, but success is not gauranteed, nor is it gauranteed to be non-destructive."
   echo " Proceed at your own risk."
   echo " Press Ctrl-C at any time to quit."
