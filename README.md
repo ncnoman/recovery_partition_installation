@@ -1,5 +1,5 @@
 # recovery_partition_installation
-Creates missing Recovery HD partitions needed to enable FileVault. Works with Mojave.
+Creates missing Recovery HD partition needed to enable FileVault. Works with Mojave.
 
 Requirements:
 
